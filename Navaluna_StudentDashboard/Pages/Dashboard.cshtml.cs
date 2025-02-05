@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Navaluna_StudentDashboard.Pages.Shared
+namespace Navaluna_StudentDashboard.Pages
 {
     public class DashboardModel : PageModel
     {

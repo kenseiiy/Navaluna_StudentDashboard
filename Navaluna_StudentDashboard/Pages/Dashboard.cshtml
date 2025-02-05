@@ -28,11 +28,12 @@ else
     <ul>
         @foreach (var student in students)
         {
-            <li>
+            <li style="@(student.Score >= 90 ? "background-color: green;" : "")">
                 @student.Name - Score: @student.Score
                 @if (student.Score >= 90)
                 {
                     <strong>(Excellent)</strong>
+                    
                 }
                 else if (student.Score >= 80)
                 {
