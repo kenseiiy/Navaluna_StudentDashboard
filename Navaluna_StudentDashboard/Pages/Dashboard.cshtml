@@ -1,5 +1,6 @@
 ﻿@page
 @model DashboardModel
+@using System.Linq
 @{
     ViewData["Title"] = "Student Dashboard";
     var students = new List<Student>
@@ -9,41 +10,34 @@
         new Student { Name = "Charlie", Score = 78 },
         new Student { Name = "Diana", Score = 88 }
     };
+    var averageScore = students.Average(s => s.Score);
+
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <p>Welcome to the student dashboard. Below is the performance summary:</p>
+<p>Total Students: @students.Count</p>
 
-<!-- Conditional Example -->
-@if (students.Count == 0)
-{
-    <p>No students found.</p>
-}
-else
-{
-    <p>Total Students: @students.Count</p>
+<ul>
+    @foreach (var student in students)
+    {
+        <li style="@(student.Score > 90 ? "background-color: green" : "")">
+            @student.Name - Score: @student.Score
+            @if (student.Score >= 90)
+            {
+                <strong>(Excellent)</strong>
+            }
+            else if (student.Score >= 80)
+            {
+                <strong>(Good)</strong>
+            }
+            else
+            {
+                <span>(Needs Improvement)</span>
+            }
+        </li>
+    }
+</ul>
 
-    <!-- Loop Example -->
-    <ul>
-        @foreach (var student in students)
-        {
-            <li style="@(student.Score >= 90 ? "background-color: green;" : "")">
-                @student.Name - Score: @student.Score
-                @if (student.Score >= 90)
-                {
-                    <strong>(Excellent)</strong>
-                    
-                }
-                else if (student.Score >= 80)
-                {
-                    <em>(Good)</em>
-                }
-                else
-                {
-                    <span>(Needs Improvement)</span>
-                }
-            </li>
-        }
-    </ul>
-}
+<p><strong>Average Score:</strong> @averageScore</p>
